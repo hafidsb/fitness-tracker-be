@@ -6,6 +6,7 @@ services:
       POSTGRES_DB: auth_db
       POSTGRES_USER: auth_user
       POSTGRES_PASSWORD: auth_pass
+      JWT_PRIVATE_KEY_PATH: /run/secrets/auth_private_key
     ports:
       - "5432:5432"
     volumes:

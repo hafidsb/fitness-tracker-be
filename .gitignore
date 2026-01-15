@@ -142,5 +142,8 @@ replay_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij
 
-# .pem
+# Ignore all PEM files
 *.pem
+
+# Allow specific PEM file
+!services/auth-service/src/test/resources/keys/test_private_key.pem
