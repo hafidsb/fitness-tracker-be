@@ -18,9 +18,6 @@ public class InternalUserService {
         repository.save(
                 User.builder()
                         .id(id)
-                        .status(User.Status.ACTIVE)
-                        .createdAt(LocalDateTime.now())
-                        .updatedAt(LocalDateTime.now())
                         .build()
         );
     }

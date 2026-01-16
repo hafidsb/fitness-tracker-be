@@ -46,6 +46,13 @@ public class User {
     @Column
     private LocalDateTime updatedAt;
 
+    @PrePersist
+    void prePersist() {
+        this.status = Status.ACTIVE;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
     public enum Gender {
         MALE,
         FEMALE,
