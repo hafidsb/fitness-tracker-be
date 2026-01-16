@@ -1,12 +1,13 @@
 package com.hafidsb.fitnesstracker.authservice.controller;
 
+import com.hafidsb.fitnesstracker.authservice.dto.LoginRequestDto;
+import com.hafidsb.fitnesstracker.authservice.dto.LoginResponseDto;
 import com.hafidsb.fitnesstracker.authservice.dto.RegisterUserRequestDto;
 import com.hafidsb.fitnesstracker.authservice.dto.RegisterUserResponseDto;
 import com.hafidsb.fitnesstracker.authservice.entity.User;
 import com.hafidsb.fitnesstracker.authservice.service.JwtService;
 import com.hafidsb.fitnesstracker.authservice.service.UserService;
 import com.hafidsb.fitnesstracker.common.dto.api.ApiResponse;
-import com.hafidsb.fitnesstracker.common.dto.api.ErrorResponseDto;
 import com.hafidsb.fitnesstracker.common.dto.api.SuccessResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,21 +28,29 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse> register(@RequestBody @Valid RegisterUserRequestDto dto) {
-        try {
-            User user = userService.registerAndReturn(dto);
-            String token = jwtService.generateAccessToken(user.getId().toString());
+        User user = userService.registerAndReturn(dto);
+        String token = jwtService.generateAccessToken(user.getId().toString());
 
-            return ResponseEntity.ok(new SuccessResponseDto<>(
-                    HttpStatus.OK.value(),
-                    "User registered successfully",
-                    new RegisterUserResponseDto(token)
-            ));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponseDto(
-                    HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                    HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
-                    e.getMessage()
-            ));
-        }
+        return ResponseEntity.ok(new SuccessResponseDto<>(
+                HttpStatus.OK.value(),
+                "User registered successfully",
+                new RegisterUserResponseDto(token)
+        ));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse> login(@RequestBody @Valid LoginRequestDto dto) {
+        User user = userService.loginAndReturn(dto);
+        String token = jwtService.generateAccessToken(user.getId().toString());
+
+        return ResponseEntity.ok(new SuccessResponseDto<>(
+                HttpStatus.OK.value(),
+                "Success",
+                new LoginResponseDto(
+                        user.getId(),
+                        user.getEmail(),
+                        token
+                )
+        ));
     }
 }
