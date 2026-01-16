@@ -19,8 +19,10 @@ services:
       APP_PORT: 8080
       SPRING_PROFILES_ACTIVE: docker
       JWT_PRIVATE_KEY_PATH: /app/config/jwt-private.pem
+      JWT_PUBLIC_KEY_PATH: file:/app/config/jwt-public.pem
     volumes:
       - ./services/auth-service/secrets/jwt-private.pem:/app/config/jwt-private.pem:ro
+      - ./services/auth-service/keys/jwt-public.pem:/app/config/jwt-public.pem:ro
 
   user-service:
     build: ./services/user-service

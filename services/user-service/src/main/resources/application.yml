@@ -1,6 +1,10 @@
 server:
   port: ${APP_PORT:8082}
 
+services:
+  auth:
+    base-url: http://${AUTH_SERVICE_HOST:auth-service:8080}
+
 spring:
   application:
     name: user-service

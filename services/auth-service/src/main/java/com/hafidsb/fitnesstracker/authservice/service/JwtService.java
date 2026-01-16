@@ -26,7 +26,8 @@ public class JwtService {
 
         return Jwts.builder()
                 .subject(sub)
-                .issuer(issuer)
+                .issuer("http://auth-service")
+                .claim("scope", "internal")
                 .signWith(this.privateKey, algorithm)
                 .issuedAt(new Date(System.currentTimeMillis()))
                 .expiration(new Date(System.currentTimeMillis() + expirationInSeconds * 1000))
