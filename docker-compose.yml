@@ -2,13 +2,12 @@ services:
   postgres:
     image: postgres:16
     environment:
-      POSTGRES_DB: auth_db
-      POSTGRES_USER: auth_user
-      POSTGRES_PASSWORD: auth_pass
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
     ports:
       - "5432:5432"
     volumes:
-      - auth_pg_data:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
 
   auth-service:
     build: ./services/auth-service
@@ -22,5 +21,17 @@ services:
     volumes:
       - ./services/auth-service/secrets/jwt-private.pem:/app/config/jwt-private.pem:ro
 
+  user-service:
+    build: ./services/user-service
+    ports:
+      - "8082:8080"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      JWT_PUBLIC_KEY_PATH: file:/app/config/jwt-public.pem
+    volumes:
+      - ./services/user-service/keys/jwt-public.pem:/app/config/jwt-public.pem:ro
+
 volumes:
-  auth_pg_data:
+  pg_data:
