@@ -1,3 +1,7 @@
+logging:
+  level:
+    org.flywaydb: DEBUG
+
 spring:
   application:
     name: auth-service
@@ -5,6 +9,10 @@ spring:
     url: jdbc:postgresql://postgres:5432/auth_db
     username: auth_user
     password: auth_pass
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
   jpa:
     hibernate:
       ddl-auto: validate
