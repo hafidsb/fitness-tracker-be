@@ -16,6 +16,7 @@ services:
     depends_on:
       - postgres
     environment:
+      APP_PORT: 8080
       SPRING_PROFILES_ACTIVE: docker
       JWT_PRIVATE_KEY_PATH: /app/config/jwt-private.pem
     volumes:
@@ -28,6 +29,7 @@ services:
     depends_on:
       - postgres
     environment:
+      APP_PORT: 8080
       SPRING_PROFILES_ACTIVE: docker
       JWT_PUBLIC_KEY_PATH: file:/app/config/jwt-public.pem
     volumes:
