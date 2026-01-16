@@ -30,4 +30,14 @@ public class JwtService {
                 .expiration(new Date(System.currentTimeMillis() + expirationInSeconds * 1000))
                 .compact();
     }
+
+    public String generateInternalToken(String subject) {
+        return Jwts.builder()
+                .subject(subject)
+                .claim("scope", "internal")
+                .issuedAt(new Date())
+                .expiration(new Date(System.currentTimeMillis() + 5 * 60 * 1000))
+                .signWith(privateKey, Jwts.SIG.RS256)
+                .compact();
+    }
 }

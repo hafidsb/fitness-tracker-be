@@ -1,4 +1,4 @@
-package com.hafidsb.fitnesstracker.userservice.controller;
+package com.hafidsb.fitnesstracker.userservice.controller.publicapi;
 
 import com.hafidsb.fitnesstracker.common.dto.UserSummaryDto;
 import com.hafidsb.fitnesstracker.userservice.service.UserService;
