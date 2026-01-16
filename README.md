@@ -187,7 +187,7 @@ Recommended test flow:
 ### Run Locally
 
 ```bash
-mvn clean install
+mvn clean install -DskipTests
 ```
 
 ```bash
