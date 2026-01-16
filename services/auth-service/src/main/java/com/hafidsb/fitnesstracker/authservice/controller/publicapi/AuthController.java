@@ -1,4 +1,4 @@
-package com.hafidsb.fitnesstracker.authservice.controller;
+package com.hafidsb.fitnesstracker.authservice.controller.publicapi;
 
 import com.hafidsb.fitnesstracker.authservice.dto.LoginRequestDto;
 import com.hafidsb.fitnesstracker.authservice.dto.LoginResponseDto;
