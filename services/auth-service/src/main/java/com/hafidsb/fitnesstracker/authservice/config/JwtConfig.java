@@ -19,7 +19,7 @@ public class JwtConfig {
 
     @Bean
     public PrivateKey jwtPrivateKey(
-            @Value("${JWT_PRIVATE_KEY_PATH}") Path keyPath
+            @Value("${security.jwt.private-key-path}") Path keyPath
     ) {
         try {
             String pem = Files.readString(keyPath)
@@ -34,7 +34,7 @@ public class JwtConfig {
                     .generatePrivate(keySpec);
         } catch (Exception e) {
             throw new IllegalStateException(
-                    "JWT private key not found. Run generate-jwt-key.sh",
+                    "JWT private key not found. Run generate-jwt-private-key.sh",
                     e
             );
         }

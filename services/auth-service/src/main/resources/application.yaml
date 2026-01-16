@@ -6,7 +6,7 @@ spring:
   application:
     name: auth-service
   datasource:
-    url: jdbc:postgresql://postgres:5432/auth_db
+    url: jdbc:postgresql://localhost:5432/auth_db
     username: auth_user
     password: auth_pass
   flyway:
@@ -20,4 +20,5 @@ spring:
 
 security:
   jwt:
+    expiration: ${JWT_EXPIRATION:3600}
     private-key-path: ${JWT_PRIVATE_KEY_PATH}

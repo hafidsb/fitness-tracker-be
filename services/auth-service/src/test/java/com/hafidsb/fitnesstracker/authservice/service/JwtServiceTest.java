@@ -5,26 +5,28 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = {
         JwtService.class,
         JwtTestConfig.class
 })
+@TestPropertySource(properties = {
+        "security.jwt.expiration=3600"
+})
 class JwtServiceTest {
 
     @Autowired
     private JwtService jwtService;
 
-
     @Test
     void shouldGenerateValidJwt() {
-        String accessToken = jwtService.generateAccessToken();
+        String accessToken = jwtService.generateAccessToken("sub-test");
 
         assertNotNull(accessToken);
         assertEquals(3, accessToken.split("\\.").length);
