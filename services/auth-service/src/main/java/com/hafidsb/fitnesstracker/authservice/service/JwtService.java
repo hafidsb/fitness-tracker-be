@@ -18,9 +18,6 @@ public class JwtService {
     @Value("${security.jwt.expiration}")
     private Long expirationInSeconds;
 
-    @Value("${spring.application.name}")
-    private String issuer;
-
     public String generateAccessToken(String sub) {
         SignatureAlgorithm algorithm = Jwts.SIG.RS256;
 
